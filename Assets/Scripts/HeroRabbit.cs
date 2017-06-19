@@ -14,7 +14,6 @@ public class HeroRabbit : MonoBehaviour
     public float JumpSpeed = 2f;
     Transform heroParent = null;
     //bool isDead = false;
-
     // Use this for initialization
     void Start()
     {
@@ -25,6 +24,11 @@ public class HeroRabbit : MonoBehaviour
         //Зберегти стандартний батьківський GameObject
         this.heroParent = this.transform.parent;
     }
+    public bool isRabbitGrounded() {
+        return isGrounded;
+
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -52,12 +56,10 @@ public class HeroRabbit : MonoBehaviour
         }
         if (LevelController.current.isRabbitDead())
         {
-            animator.SetBool("death", true);
+            // animator.SetBool("death", true);
+            animator.SetTrigger("die");
         }
-        else
-        {
-            animator.SetTrigger("reset");
-        }
+       
         if (Mathf.Abs(value) > 0)
         {
             Vector2 vel = myBody.velocity;

@@ -12,9 +12,15 @@ public class LevelController : MonoBehaviour
     bool isBigRabbit = false;
     bool isDead = false;
     public static LevelController current;
+    bool deathZone = false;
     void Awake()
     {
         current = this;
+    }
+   public bool DeathZone()
+    {
+        this.deathZone = !deathZone;
+        return this.deathZone;
     }
     public void setStartPosition(Vector3 pos)
     {
@@ -31,20 +37,31 @@ public class LevelController : MonoBehaviour
     
     public void onRabitDeath(HeroRabbit rabit)
     {
-        if (this.isBiggerRabbit())
+
+        if (this.isBiggerRabbit() )
         {
             this.scaleSmallerRabit(rabit);
+            if(this.deathZone){
+            this.isDead = true;
+                //Повідомляємо рівень, про смерть кролика
+                //При смерті кролика повертаємо на початкову позицію
+          rabit.transform.position = this.startingPosition;
+          rabit.transform.rotation = this.startingRotation;
+
+         
+            }
         }
         else
         {
-            
+            this.isDead = true;
                 //Повідомляємо рівень, про смерть кролика
                 //При смерті кролика повертаємо на початкову позицію
-                rabit.transform.position = this.startingPosition;
-                rabit.transform.rotation = this.startingRotation;
-               
+          rabit.transform.position = this.startingPosition;
+          rabit.transform.rotation = this.startingRotation;
            
         }
+    }
+    void Update() { this.isDead = false;  this.deathZone = false;
     }
     public bool isBiggerRabbit()
     {
@@ -56,15 +73,17 @@ public class LevelController : MonoBehaviour
     }
     public void scaleRabit(HeroRabbit rabit)
     {
+        if(!this.isBigRabbit){
         rabit.transform.localScale += new Vector3(0.5F, 0.5F, 0.5F);
-        this.isBigRabbit = true;
+        this.isBigRabbit = true;}
        
     }
     public void scaleSmallerRabit(HeroRabbit rabit)
     {
+    
         rabit.transform.localScale -= new Vector3(0.5F, 0.5F, 0.5F);
-        this.isBigRabbit = false;
+        this.isBigRabbit = false;}
 
     }
 
-}
+

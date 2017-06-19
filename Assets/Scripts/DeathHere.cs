@@ -13,7 +13,7 @@ public class DeathHere : MonoBehaviour
         //Впасти міг не тільки кролик
         if (rabit != null)
         {
-            
+            LevelController.current.DeathZone();
             //Повідомляємо рівень, про смерть кролика
                 LevelController.current.onRabitDeath(rabit);
             
