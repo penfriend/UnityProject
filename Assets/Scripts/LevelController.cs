@@ -42,7 +42,8 @@ public class LevelController : MonoBehaviour
         {
             this.scaleSmallerRabit(rabit);
             if(this.deathZone){
-                this.isDead = true; StartCoroutine(rabbitDie(rabit));
+                this.isDead = true; rabit.transform.position = this.startingPosition;
+                rabit.transform.rotation = this.startingRotation;
             
 
          
