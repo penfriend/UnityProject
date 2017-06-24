@@ -9,8 +9,7 @@ public class Collectable : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-            //HeroRabbit rabbit = collider.GetComponent<HeroRabbit>();
-        HeroRabbit rabbit = collider.gameObject.GetComponent<HeroRabbit>();
+            HeroRabbit rabbit = collider.gameObject.GetComponent<HeroRabbit>();
             if (rabbit != null)
             {
                 this.OnRabitHit(rabbit);

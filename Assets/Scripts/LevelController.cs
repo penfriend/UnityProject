@@ -53,6 +53,7 @@ public class LevelController : MonoBehaviour
         }
         else
         {
+            
             this.isDead = true;
                 //Повідомляємо рівень, про смерть кролика
                 //При смерті кролика повертаємо на початкову позицію
@@ -61,6 +62,7 @@ public class LevelController : MonoBehaviour
            
         }
     }
+    
     void Update() { this.isDead = false;  this.deathZone = false;
     }
     public bool isBiggerRabbit()

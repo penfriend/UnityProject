@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour
 {
-    
+    public static HeroRabbit lastRabit = null;
     public float speed = 1;
     Rigidbody2D myBody = null;
     bool isGrounded = false;
@@ -128,6 +128,10 @@ SetNewParent(this.transform, hit.transform);
             }
         }
 
+    }
+    void Awake()
+    {
+        lastRabit = this;
     }
     static void SetNewParent(Transform obj, Transform new_parent)
     {
