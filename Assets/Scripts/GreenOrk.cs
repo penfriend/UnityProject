@@ -120,6 +120,7 @@ public class GreenOrk : MonoBehaviour
     }
 
     void isDead() { this.greenOrkController.SetBool("death", true); }
+    void isAttack() { this.greenOrkController.SetTrigger("attack"); }
     bool isArrived(Vector3 target)
     {
         target.z = 0;
@@ -133,14 +134,24 @@ public class GreenOrk : MonoBehaviour
             Vector3 v = (Vector3)coll.gameObject.transform.position;
             HeroRabbit rabbitCollision = coll.gameObject.GetComponent<HeroRabbit>();
             if (v.y > this.transform.position.y) { StartCoroutine(orcDie()); }
-            else { LevelController.current.onRabitDeath(rabbitCollision); }
+            else
+            {
+                
+                StartCoroutine(orcAttack( rabbitCollision));
+                 }
         }
     }
     IEnumerator orcDie()
     {
         this.isDead();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
+    }
+    IEnumerator orcAttack(HeroRabbit rabbitCollision)
+    {
+        this.isAttack();
+        yield return new WaitForSeconds(1); 
+        LevelController.current.onRabitDeath(rabbitCollision);
     }
 
 }

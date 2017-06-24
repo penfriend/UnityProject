@@ -13,7 +13,7 @@ public class HeroRabbit : MonoBehaviour
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
     Transform heroParent = null;
-    //bool isDead = false;
+    public bool isDead = false;
     // Use this for initialization
     void Start()
     {
@@ -29,7 +29,7 @@ public class HeroRabbit : MonoBehaviour
 
     }
 
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +38,7 @@ public class HeroRabbit : MonoBehaviour
         float diff = Time.deltaTime;
 
         Animator animator = GetComponent<Animator>();
+        if (this.isDead) animator.SetTrigger("die");
         if (Mathf.Abs(value) > 0)
         {
             animator.SetBool("run", true);
@@ -54,11 +55,7 @@ public class HeroRabbit : MonoBehaviour
         {
             animator.SetBool("jump", true);
         }
-        if (LevelController.current.isRabbitDead())
-        {
-            // animator.SetBool("death", true);
-            animator.SetTrigger("die");
-        }
+        
        
         if (Mathf.Abs(value) > 0)
         {

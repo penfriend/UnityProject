@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-
+    public bool bomb = false;
     float time_to_wait = 5f;
     Vector3 startingPosition;
     Quaternion startingRotation;
@@ -42,27 +42,30 @@ public class LevelController : MonoBehaviour
         {
             this.scaleSmallerRabit(rabit);
             if(this.deathZone){
-            this.isDead = true;
-                //Повідомляємо рівень, про смерть кролика
-                //При смерті кролика повертаємо на початкову позицію
-          rabit.transform.position = this.startingPosition;
-          rabit.transform.rotation = this.startingRotation;
+                this.isDead = true; StartCoroutine(rabbitDie(rabit));
+            
 
          
             }
         }
         else
         {
+            StartCoroutine(rabbitDie(rabit));
+          this.isDead = true;
             
-            this.isDead = true;
-                //Повідомляємо рівень, про смерть кролика
-                //При смерті кролика повертаємо на початкову позицію
-          rabit.transform.position = this.startingPosition;
-          rabit.transform.rotation = this.startingRotation;
-           
         }
     }
-    
+    IEnumerator rabbitDie(HeroRabbit rabit)
+    {
+        rabit.isDead=true;
+        yield return new WaitForSeconds(1);
+        //Повідомляємо рівень, про смерть кролика
+        //При смерті кролика повертаємо на початкову позицію
+        rabit.isDead = false;
+        rabit.transform.position = this.startingPosition;
+        rabit.transform.rotation = this.startingRotation;
+        
+    }
     void Update() { this.isDead = false;  this.deathZone = false;
     }
     public bool isBiggerRabbit()
