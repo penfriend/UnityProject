@@ -8,7 +8,6 @@ public class Bomb : Collectable
     {
         //Level.current.addCoins(1);
         this.CollectedHide();
-        LevelController.current.bomb = true;
         LevelController.current.onRabitDeath(rabit);
     }
 }

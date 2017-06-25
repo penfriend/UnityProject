@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    public bool bomb = false;
+    //public bool bomb = false;
     float time_to_wait = 5f;
     Vector3 startingPosition;
     Quaternion startingRotation;
